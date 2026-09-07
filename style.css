@@ -980,3 +980,52 @@ footer p {
     }
 
 }
+/* =========================================================
+   ADMIN PRODUCT UPLOAD
+========================================================= */
+
+.admin-section {
+    background: var(--soft-cream);
+}
+
+.admin-form {
+    max-width: 600px;
+    margin: auto;
+    background: var(--white);
+    padding: 35px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(84, 19, 41, 0.08);
+}
+
+.admin-form label {
+    display: block;
+    color: var(--dark-maroon);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    margin-top: 18px;
+}
+
+.admin-form label:first-child {
+    margin-top: 0;
+}
+
+.admin-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background: var(--cream);
+}
+
+.admin-form input:focus {
+    outline: none;
+    border-color: var(--maroon);
+}
+
+.admin-form button {
+    margin-top: 25px;
+    cursor: pointer;
+}
