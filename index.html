@@ -397,7 +397,83 @@
             </div>
 
         </section>
+<!-- =========================
+     ADMIN - ADD PRODUCT
+========================== -->
 
+<section id="admin" class="admin-section">
+
+    <div class="section-heading">
+
+        <p>ADMIN PANEL</p>
+
+        <h2>Add New Product</h2>
+
+    </div>
+
+    <div class="admin-form">
+
+        <label>
+            Product Photo
+        </label>
+
+        <input
+            type="file"
+            id="product-image"
+            accept="image/*"
+        >
+
+        <label>
+            Product Name
+        </label>
+
+        <input
+            type="text"
+            id="product-name"
+            placeholder="Example: Elegant Printed Kurti"
+        >
+
+        <label>
+            Selling Price
+        </label>
+
+        <input
+            type="number"
+            id="product-price"
+            placeholder="699"
+        >
+
+        <label>
+            MRP
+        </label>
+
+        <input
+            type="number"
+            id="product-mrp"
+            placeholder="1399"
+        >
+
+        <label>
+            Category
+        </label>
+
+        <input
+            type="text"
+            id="product-category"
+            placeholder="Women's Kurti"
+        >
+
+        <button
+            type="button"
+            class="primary-button"
+            onclick="addNewProduct()"
+        >
+            Add Product
+        </button>
+
+    </div>
+
+</section>
     </main>
 
 
