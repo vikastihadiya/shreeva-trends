@@ -3,498 +3,607 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Shreeva Trends | Women's Fashion</title>
 
     <meta name="description"
-          content="Shreeva Trends - Stylish and affordable women's clothing.">
+        content="Shreeva Trends - stylish and affordable women's clothing in Dhanaura.">
+
+    <link rel="icon" href="logo.jpg">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase Configuration -->
+    <script src="supabase-config.js"></script>
 </head>
 
 <body>
 
-    <!-- =========================
-         OFFER BAR
-    ========================== -->
+    <!-- ================= HEADER ================= -->
 
-    <div class="offer-bar">
-        ✨ Special Offer - Up To 50% OFF ✨
-    </div>
+    <header class="site-header">
 
+        <div class="header-inner">
 
-    <!-- =========================
-         NAVIGATION
-    ========================== -->
+            <a href="#home" class="brand">
+                <img src="logo.jpg" alt="Shreeva Trends">
+            </a>
 
-    <header class="navbar">
+            <nav class="desktop-nav">
+                <a href="#home">Home</a>
+                <a href="#new-collection">New Collection</a>
+                <a href="#shop">Shop</a>
+                <a href="#offers">Special Offers</a>
+                <a href="#feedback">Feedback</a>
+            </nav>
 
-        <div class="logo">
-            Shreeva <span>Trends</span>
+            <button class="cart-button" id="openCartBtn">
+                🛍️ Cart
+                <span id="cart-count">0</span>
+            </button>
+
         </div>
-
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#collections">Collections</a>
-            <a href="#offers">Offers</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-        <button class="cart-button" onclick="showCart()">
-        <button class="cart-button" onclick="showCart()">
-            🛍️ Cart(<span id="cart-count">0</span>)
-        </button>
 
     </header>
 
 
-    <!-- =========================
-         HERO SECTION
-    ========================== -->
+    <!-- ================= MAIN ================= -->
 
     <main>
 
-        <section id="home" class="hero">
+        <!-- HERO -->
+
+        <section class="hero" id="home">
 
             <div class="hero-content">
 
-                <p class="small-heading">
-                    WELCOME TO SHREEVA TRENDS
+                <p class="eyebrow">
+                    Elegant • Modern • Affordable
                 </p>
 
                 <h1>
-                    Style That Makes
-                    You Feel Beautiful
+                    Fashion that feels
+                    <span>beautifully yours.</span>
                 </h1>
 
                 <p>
-                    Discover stylish and elegant women's
-                    clothing for every occasion.
+                    Explore the latest women's collection from
+                    Shreeva Trends.
                 </p>
 
-                <a href="#collections" class="primary-button">
-                    Shop Collection
+                <div class="hero-actions">
+
+                    <a href="#shop" class="btn primary">
+                        Shop Collection
+                    </a>
+
+                    <a href="#offers" class="btn secondary">
+                        View Offers
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="hero-card">
+
+                <img
+                    src="logo.jpg"
+                    alt="Shreeva Trends">
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NEW COLLECTION ================= -->
+
+        <section class="section" id="new-collection">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Fresh arrivals
+                    </p>
+
+                    <h2>
+                        New Collection
+                    </h2>
+
+                </div>
+
+                <p>
+                    Discover pieces recently added by our shop.
+                </p>
+
+            </div>
+
+            <div
+                class="product-grid"
+                id="newProducts">
+            </div>
+
+        </section>
+
+
+        <!-- ================= SHOP ================= -->
+
+        <section
+            class="section shop-section"
+            id="shop">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Browse the collection
+                    </p>
+
+                    <h2>
+                        Shop Shreeva Trends
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="shop-tools">
+
+                <label class="search-box">
+
+                    <span>🔎</span>
+
+                    <input
+                        id="searchInput"
+                        type="search"
+                        placeholder="Search products..."
+                        autocomplete="off">
+
+                </label>
+
+
+                <select
+                    id="categoryFilter"
+                    aria-label="Filter products">
+
+                    <option value="all">
+                        All categories
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="product-grid"
+                id="allProducts">
+            </div>
+
+
+            <div
+                class="empty-state"
+                id="productsEmpty"
+                hidden>
+
+                <h3>
+                    Collection Coming Soon
+                </h3>
+
+                <p>
+                    New styles will appear here soon.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SPECIAL OFFERS ================= -->
+
+        <section
+            class="section offers-section"
+            id="offers">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Limited-time picks
+                    </p>
+
+                    <h2>
+                        Special Offers
+                    </h2>
+
+                </div>
+
+                <p>
+                    Enjoy selected styles at special prices.
+                </p>
+
+            </div>
+
+
+            <div
+                class="product-grid"
+                id="offerProducts">
+            </div>
+
+
+            <div
+                class="empty-state"
+                id="offersEmpty"
+                hidden>
+
+                <h3>
+                    No special offers right now
+                </h3>
+
+                <p>
+                    Check back soon for the next offer.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEEDBACK ================= -->
+
+        <section
+            class="feedback-section section"
+            id="feedback">
+
+            <div class="feedback-intro">
+
+                <p class="eyebrow">
+                    We value your experience
+                </p>
+
+                <h2>
+                    Customer Feedback
+                </h2>
+
+                <p>
+                    Share your experience with Shreeva Trends.
+                    New feedback is reviewed before it appears publicly.
+                </p>
+
+            </div>
+
+
+            <form
+                id="feedbackForm"
+                class="feedback-form">
+
+                <input
+                    id="feedbackName"
+                    type="text"
+                    maxlength="80"
+                    placeholder="Your name"
+                    required>
+
+
+                <select
+                    id="feedbackRating"
+                    required>
+
+                    <option value="">
+                        Rating
+                    </option>
+
+                    <option value="5">
+                        ★★★★★ — 5
+                    </option>
+
+                    <option value="4">
+                        ★★★★☆ — 4
+                    </option>
+
+                    <option value="3">
+                        ★★★☆☆ — 3
+                    </option>
+
+                    <option value="2">
+                        ★★☆☆☆ — 2
+                    </option>
+
+                    <option value="1">
+                        ★☆☆☆☆ — 1
+                    </option>
+
+                </select>
+
+
+                <textarea
+                    id="feedbackMessage"
+                    maxlength="500"
+                    placeholder="Write your feedback..."
+                    required>
+                </textarea>
+
+
+                <button
+                    class="btn primary"
+                    type="submit">
+
+                    Submit Feedback
+
+                </button>
+
+
+                <p
+                    id="feedbackStatus"
+                    class="form-status">
+                </p>
+
+            </form>
+
+
+            <div
+                class="reviews-grid"
+                id="reviewsGrid">
+            </div>
+
+        </section>
+
+
+        <!-- ================= LOCATION ================= -->
+
+        <section class="location-section">
+
+            <div>
+
+                <p class="eyebrow">
+                    Visit our shop
+                </p>
+
+                <h2>
+                    Shreeva Trends
+                </h2>
+
+                <p>
+                    Amroha Road, Dhanaura
+                    (Front of Amul Dairy)
+                </p>
+
+            </div>
+
+
+            <div class="contact-actions">
+
+                <a
+                    class="btn primary"
+                    href="https://wa.me/919897805050"
+                    target="_blank">
+
+                    WhatsApp Us
+
+                </a>
+
+
+                <a
+                    class="btn secondary"
+                    href="https://www.instagram.com/shreeva.trends_/"
+                    target="_blank">
+
+                    Instagram
+
                 </a>
 
             </div>
 
         </section>
 
-
-        <!-- =========================
-             COLLECTIONS
-        ========================== -->
-
-        <section id="collections" class="collections">
-
-            <div class="section-heading">
-
-                <p>EXPLORE</p>
-
-                <h2>Our Collections</h2>
-
-            </div>
-
-
-            <div class="category-grid">
-
-                <div class="category-card">
-                    <div class="category-image">
-                        👗
-                    </div>
-
-                    <h3>Kurtis</h3>
-
-                    <p>
-                        Elegant everyday styles
-                    </p>
-                </div>
-
-
-                <div class="category-card">
-                    <div class="category-image">
-                        👚
-                    </div>
-
-                    <h3>Co-ord Sets</h3>
-
-                    <p>
-                        Modern and comfortable
-                    </p>
-                </div>
-
-
-                <div class="category-card">
-                    <div class="category-image">
-                        🥻
-                    </div>
-
-                    <h3>Ethnic Wear</h3>
-
-                    <p>
-                        Traditional with a modern touch
-                    </p>
-                </div>
-
-
-                <div class="category-card">
-                    <div class="category-image">
-                        ✨
-                    </div>
-
-                    <h3>New Arrivals</h3>
-
-                    <p>
-                        Fresh styles for you
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             FEATURED PRODUCTS
-        ========================== -->
-
-        <section class="products">
-
-            <div class="section-heading">
-
-                <p>SHOP NOW</p>
-
-                <h2>Featured Collection</h2>
-
-            </div>
-
-
-            <div class="product-grid">
-
-
-                <!-- PRODUCT 1 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                            <img src="images/shreeva_trends_kurti.jpg" alt="Floral Cotton Kurti">
-                        </div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <h3>
-                            Elegant Printed Kurti
-                        </h3>
-
-                        <p>
-                            Women's Kurti
-                        </p>
-
-                        <strong>
-                            ₹699
-                        </strong>
-
-                        <del>
-                            ₹1,399
-                        </del>
-
-                        <button class="add-cart">
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 2 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="sale-tag">
-                            NEW
-                        </span>
-
-                        <div class="placeholder-image">
-                            Product Photo
-                        </div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <h3>
-                            Floral Cotton Kurti
-                        </h3>
-
-                        <p>
-                            Women's Kurti
-                        </p>
-
-                        <strong>
-                            ₹799
-                        </strong>
-
-                        <del>
-                            ₹1,499
-                        </del>
-
-                        <button class="add-cart">
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PRODUCT 3 -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-
-                        <span class="sale-tag">
-                            SALE
-                        </span>
-
-                        <div class="placeholder-image">
-                            Product Photo
-                        </div>
-
-                    </div>
-
-                    <div class="product-info">
-
-                        <h3>
-                            Designer Ethnic Set
-                        </h3>
-
-                        <p>
-                            Ethnic Wear
-                        </p>
-
-                        <strong>
-                            ₹999
-                        </strong>
-
-                        <del>
-                            ₹1,999
-                        </del>
-
-                        <button class="add-cart">
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SPECIAL OFFER
-        ========================== -->
-
-        <section id="offers" class="offer-section">
-
-            <p>LIMITED TIME OFFER</p>
-
-            <h2>
-                Up To
-                <strong>50% OFF</strong>
-            </h2>
-
-            <p>
-                Refresh your wardrobe with our latest
-                women's collection.
-            </p>
-
-            <a href="#collections" class="primary-button">
-                Shop Now
-            </a>
-
-        </section>
-
-
-        <!-- =========================
-             ABOUT US
-        ========================== -->
-
-        <section id="about" class="about">
-
-            <div class="about-content">
-
-                <p>ABOUT US</p>
-
-                <h2>
-                    Welcome to Shreeva Trends
-                </h2>
-
-                <p>
-                    Shreeva Trends brings stylish and
-                    affordable women's fashion for
-                    everyday life, celebrations and
-                    special occasions.
-                </p>
-
-                <p>
-                    Our goal is simple — to help every
-                    woman find something she loves and
-                    feels confident wearing.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONTACT
-        ========================== -->
-
-        <section id="contact" class="contact">
-
-            <div class="section-heading">
-
-                <p>GET IN TOUCH</p>
-
-                <h2>
-                    Contact Shreeva Trends
-                </h2>
-
-            </div>
-
-            <div class="contact-info">
-
-                <p>
-                    📞 Phone: +91 XXXXXXXXXX
-                </p>
-
-                <p>
-                    📱 WhatsApp: +91 XXXXXXXXXX
-                </p>
-
-                <p>
-                    📸 Instagram: @shreevatrends
-                </p>
-
-                <p>
-                    📍 Address: Your Shop Address
-                </p>
-
-            </div>
-
-        </section>
-<!-- =========================
-     ADMIN - ADD PRODUCT
-========================== -->
-
-<section id="admin" class="admin-section">
-
-    <div class="section-heading">
-
-        <p>ADMIN PANEL</p>
-
-        <h2>Add New Product</h2>
-
-    </div>
-
-    <div class="admin-form">
-
-        <label>
-            Product Photo
-        </label>
-
-        <input
-            type="file"
-            id="product-image"
-            accept="image/*"
-        >
-
-        <label>
-            Product Name
-        </label>
-
-        <input
-            type="text"
-            id="product-name"
-            placeholder="Example: Elegant Printed Kurti"
-        >
-
-        <label>
-            Selling Price
-        </label>
-
-        <input
-            type="number"
-            id="product-price"
-            placeholder="699"
-        >
-
-        <label>
-            MRP
-        </label>
-
-        <input
-            type="number"
-            id="product-mrp"
-            placeholder="1399"
-        >
-
-        <label>
-            Category
-        </label>
-
-        <input
-            type="text"
-            id="product-category"
-            placeholder="Women's Kurti"
-        >
-
-        <button
-            type="button"
-            class="primary-button"
-            onclick="addNewProduct()"
-        >
-            Add Product
-        </button>
-
-    </div>
-
-</section>
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
-        <div class="logo">
-            Shreeva <span>Trends</span>
+        <div>
+
+            <strong>
+                SHREEVA TRENDS
+            </strong>
+
+            <p>
+                Female Clothes Shop
+            </p>
+
         </div>
 
-        <p>
-            © 2026 Shreeva Trends.
-            All Rights Reserved.
-        </p>
+
+        <div>
+
+            <p>
+                Amroha Road, Dhanaura
+                (Front of Amul Dairy)
+            </p>
+
+            <p>
+                WhatsApp: 9897805050
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <a
+                href="https://www.instagram.com/shreeva.trends_/"
+                target="_blank">
+
+                @shreeva.trends_
+
+            </a>
+
+        </div>
 
     </footer>
-<script src="script.js"></script>
+
+
+    <!-- ================= PRODUCT MODAL ================= -->
+
+    <div
+        class="modal"
+        id="productModal"
+        aria-hidden="true">
+
+        <div
+            class="modal-backdrop"
+            data-close="productModal">
+        </div>
+
+
+        <div
+            class="modal-card product-modal-card">
+
+            <button
+                class="modal-close"
+                data-close="productModal">
+
+                ×
+
+            </button>
+
+
+            <div id="productModalBody"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= CART ================= -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+        aria-hidden="true">
+
+        <div
+            class="cart-backdrop"
+            data-close="cartOverlay">
+        </div>
+
+
+        <aside class="cart-drawer">
+
+            <div class="cart-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Your selection
+                    </p>
+
+                    <h2>
+                        Your Cart
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="modal-close"
+                    data-close="cartOverlay">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="cartItems"
+                class="cart-items">
+            </div>
+
+
+            <div
+                id="cartEmpty"
+                class="cart-empty"
+                hidden>
+
+                <div class="empty-icon">
+                    🛍️
+                </div>
+
+                <h3>
+                    Your cart is empty
+                </h3>
+
+                <p>
+                    Add something beautiful to get started.
+                </p>
+
+                <button
+                    class="btn primary"
+                    data-close="cartOverlay">
+
+                    Continue Shopping
+
+                </button>
+
+            </div>
+
+
+            <div class="cart-footer">
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="cartTotal">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="clearCartBtn"
+                    class="text-button">
+
+                    Clear Cart
+
+                </button>
+
+
+                <button
+                    id="whatsappCheckoutBtn"
+                    class="btn whatsapp-btn">
+
+                    Order on WhatsApp
+
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- MAIN JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
 </body>
 
 </html>
