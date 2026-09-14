@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Shreeva Trends | Admin Panel
+    </title>
+
+    <meta
+        name="description"
+        content="Shreeva Trends administration panel"
+    >
+
+    <link
+        rel="icon"
+        href="logo.jpg"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+    <!-- Supabase -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <!-- Supabase configuration -->
+    <script src="supabase-config.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN SECTION
+     ===================================================== -->
+
+<section
+    id="loginSection"
+    class="auth-section"
+>
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+
+            <img
+                src="logo.jpg"
+                alt="Shreeva Trends"
+            >
+
+        </div>
+
+
+        <p class="eyebrow">
+            Shreeva Trends
+        </p>
+
+
+        <h1>
+            Admin Login
+        </h1>
+
+
+        <p class="auth-description">
+            Login to manage products, offers and customer feedback.
+        </p>
+
+
+        <form id="loginForm">
+
+
+            <div class="form-group">
+
+                <label for="adminEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Enter admin email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="adminPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="admin-btn primary-btn"
+                id="loginBtn"
+            >
+                Login
+            </button>
+
+
+            <p
+                id="loginStatus"
+                class="status-message"
+            ></p>
+
+
+        </form>
+
+
+        <button
+            type="button"
+            id="forgotPasswordBtn"
+            class="link-button"
+        >
+            Forgot Password?
+        </button>
+
+
+        <div
+            id="forgotPasswordBox"
+            class="forgot-password-box"
+            hidden
+        >
+
+            <h3>
+                Reset Password
+            </h3>
+
+            <p>
+                Enter your admin email and we will send you a password reset link.
+            </p>
+
+
+            <form id="forgotPasswordForm">
+
+                <div class="form-group">
+
+                    <label for="resetEmail">
+                        Admin Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="resetEmail"
+                        placeholder="Enter your admin email"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="admin-btn secondary-btn"
+                    id="resetEmailBtn"
+                >
+                    Send Reset Link
+                </button>
+
+
+                <p
+                    id="resetStatus"
+                    class="status-message"
+                ></p>
+
+            </form>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back-to-store"
+        >
+            ← Back to Store
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN DASHBOARD
+     ===================================================== -->
+
+<section
+    id="dashboardSection"
+    class="dashboard-section"
+    hidden
+>
+
+
+    <!-- =================================================
+         TOP BAR
+         ================================================= -->
+
+    <header class="admin-header">
+
+        <div class="admin-header-inner">
+
+
+            <div class="admin-brand">
+
+                <img
+                    src="logo.jpg"
+                    alt="Shreeva Trends"
+                >
+
+                <div>
+
+                    <strong>
+                        Admin Panel
+                    </strong>
+
+                    <span>
+                        Shreeva Trends
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-header-actions">
+
+                <a
+                    href="index.html"
+                    target="_blank"
+                    class="header-link"
+                >
+                    View Store
+                </a>
+
+
+                <button
+                    type="button"
+                    id="logoutBtn"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         MAIN ADMIN CONTENT
+         ================================================= -->
+
+    <main class="admin-main">
+
+
+        <!-- =================================================
+             DASHBOARD INTRO
+             ================================================= -->
+
+        <div class="dashboard-title">
+
+            <div>
+
+                <p class="eyebrow">
+                    Store Management
+                </p>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Add products, manage your collection and review customer feedback.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DASHBOARD STATS
+             ================================================= -->
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <span>
+                    Total Products
+                </span>
+
+                <strong id="totalProducts">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Active Products
+                </span>
+
+                <strong id="activeProducts">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    New Collection
+                </span>
+
+                <strong id="newCollectionCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Special Offers
+                </span>
+
+                <strong id="offerCount">
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT MANAGEMENT
+             ================================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Catalog
+                    </p>
+
+                    <h2>
+                        Product Management
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="newProductBtn"
+                    class="admin-btn primary-btn"
+                >
+                    + Add New Product
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PRODUCT FORM
+                 ================================================= -->
+
+            <div
+                id="productFormBox"
+                class="product-form-box"
+                hidden
+            >
+
+                <div class="form-box-header">
+
+                    <div>
+
+                        <h3 id="productFormTitle">
+                            Add New Product
+                        </h3>
+
+                        <p>
+                            Add product details and up to 10 product photos.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="cancelProductBtn"
+                        class="close-form-btn"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <form id="productForm">
+
+
+                    <input
+                        type="hidden"
+                        id="productId"
+                    >
+
+
+                    <!-- Product name -->
+
+                    <div class="form-group">
+
+                        <label for="productName">
+                            Product Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            maxlength="150"
+                            placeholder="Example: Designer Kurti"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Category -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="productCategory">
+                                Category
+                            </label>
+
+                            <input
+                                type="text"
+                                id="productCategory"
+                                maxlength="80"
+                                placeholder="Example: Kurti"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="productSizes">
+                                Sizes
+                            </label>
+
+                            <input
+                                type="text"
+                                id="productSizes"
+                                placeholder="Example: S, M, L, XL"
+                            >
+
+                            <small>
+                                Separate sizes using commas.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Price -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="productPrice">
+                                Selling Price (₹) *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="productPrice"
+                                min="0"
+                                step="1"
+                                placeholder="699"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="productMRP">
+                                MRP (₹)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="productMRP"
+                                min="0"
+                                step="1"
+                                placeholder="999"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Description -->
+
+                    <div class="form-group">
+
+                        <label for="productDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="productDescription"
+                            maxlength="1000"
+                            placeholder="Write product details..."
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- Product images -->
+
+                    <div class="form-group">
+
+                        <label for="productImages">
+                            Product Photos
+                        </label>
+
+                        <input
+                            type="file"
+                            id="productImages"
+                            accept="image/*"
+                            multiple
+                        >
+
+                        <small>
+                            Select up to 10 photos for this product.
+                        </small>
+
+
+                        <div
+                            id="imagePreview"
+                            class="image-preview"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- Existing images -->
+
+                    <div
+                        id="existingImagesBox"
+                        class="existing-images-box"
+                        hidden
+                    >
+
+                        <label>
+                            Existing Photos
+                        </label>
+
+                        <div
+                            id="existingImages"
+                            class="image-preview"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- Options -->
+
+                    <div class="options-box">
+
+
+                        <label class="checkbox-label">
+
+                            <input
+                                type="checkbox"
+                                id="isNewCollection"
+                            >
+
+                            <span>
+                                Show in New Collection
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-label">
+
+                            <input
+                                type="checkbox"
+                                id="isSpecialOffer"
+                            >
+
+                            <span>
+                                Show in Special Offers
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+
+
+                    <!-- Offer text -->
+
+                    <div
+                        id="offerTextBox"
+                        class="form-group"
+                        hidden
+                    >
+
+                        <label for="offerText">
+                            Offer Badge Text
+                        </label>
+
+                        <input
+                            type="text"
+                            id="offerText"
+                            maxlength="50"
+                            placeholder="Example: 30% OFF"
+                        >
+
+                    </div>
+
+
+
+                    <!-- Form actions -->
+
+                    <div class="form-actions">
+
+
+                        <button
+                            type="submit"
+                            id="saveProductBtn"
+                            class="admin-btn primary-btn"
+                        >
+                            Save Product
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="cancelProductBtnBottom"
+                            class="admin-btn light-btn"
+                        >
+                            Cancel
+                        </button>
+
+
+                    </div>
+
+
+                    <p
+                        id="productStatus"
+                        class="status-message"
+                    ></p>
+
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PRODUCTS TABLE
+                 ================================================= -->
+
+            <div class="table-wrapper">
+
+                <table class="products-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Product
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Options
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="productsTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="table-loading"
+                            >
+                                Loading products...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FEEDBACK MANAGEMENT
+             ================================================= -->
+
+        <section class="admin-card">
+
+
+            <div class="card-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Customer Reviews
+                    </p>
+
+                    <h2>
+                        Customer Feedback
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="feedbackAdminList"
+                class="feedback-admin-list"
+            >
+
+                <div class="table-loading">
+                    Loading feedback...
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             STORE INFORMATION
+             ================================================= -->
+
+        <section class="admin-card store-info-card">
+
+
+            <div class="card-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Store Information
+                    </p>
+
+                    <h2>
+                        Shreeva Trends
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="store-info-grid">
+
+
+                <div>
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    <p>
+                        Dhanaura Amroha Road
+                        (Front of Amul Dairy)
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        WhatsApp
+                    </strong>
+
+                    <p>
+                        9897805050
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Instagram
+                    </strong>
+
+                    <p>
+                        @shreeva.trends_
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         ADMIN FOOTER
+         ===================================================== -->
+
+    <footer class="admin-footer">
+
+        <p>
+            © <span id="adminYear"></span>
+            Shreeva Trends. Admin Panel.
+        </p>
+
+    </footer>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CONFIRM DELETE MODAL
+     ===================================================== -->
+
+<div
+    id="confirmModal"
+    class="confirm-modal"
+    hidden
+>
+
+    <div class="confirm-backdrop"></div>
+
+
+    <div class="confirm-card">
+
+        <h3>
+            Delete Product?
+        </h3>
+
+        <p>
+            This will remove the product and its uploaded photos.
+            This action cannot be undone.
+        </p>
+
+
+        <div class="confirm-actions">
+
+            <button
+                type="button"
+                id="cancelDeleteBtn"
+                class="admin-btn light-btn"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmDeleteBtn"
+                class="admin-btn danger-btn"
+            >
+                Delete Product
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
